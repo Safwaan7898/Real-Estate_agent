@@ -3,6 +3,7 @@ import os
 import re
 import json
 import logging
+import streamlit as st
 from typing import Dict, Any, List
 from dotenv import load_dotenv
 
@@ -43,7 +44,7 @@ def create_agent():
     except ImportError:
         from langgraph.checkpoint import MemorySaver
 
-    api_key = os.getenv("GROQ_API_KEY")
+    api_key = os.getenv("GROQ_API_KEY") or st.secrets.get("GROQ_API_KEY")
     if not api_key:
         raise ValueError("GROQ_API_KEY not set in environment variables.")
 
